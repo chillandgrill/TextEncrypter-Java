@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 
 public class Encrypt {
 
-    private static StringBuilder writeToFile = new StringBuilder();
+    private static StringBuilder writeToFile = new StringBuilder(); // This is the output string.
     private static char[][] seed = new char[128][2];
 
     private static boolean inSeed(char[] letterSequence) { // Make sure the generated two-character replacement for a
@@ -45,7 +45,7 @@ public class Encrypt {
         }
     }
 
-    private static void constructFile(File inFile) {
+    private static void constructFile(File inFile) { // Read the file in and add the character's encryption key into the output string.
 
         int offsetSeed = (int) (Math.random() * 128);
 
@@ -80,7 +80,7 @@ public class Encrypt {
         for (int posInFile = 0; posInFile < origFile.length(); posInFile++) {
             currentCharId = (int) origFile.charAt(posInFile);
             if ((currentCharId + offsetSeed) >= 128)
-                temp = new String(seed[currentCharId + offsetSeed - 128]); // MAY NEED TWEAKING
+                temp = new String(seed[currentCharId + offsetSeed - 128]);
             else
                 temp = new String(seed[currentCharId + offsetSeed]);
             writeToFile.append(temp);
@@ -88,7 +88,7 @@ public class Encrypt {
 
     }
 
-    public static void write(File outFile) {
+    public static void write(File outFile) {// write the output string to the original file.
 
         constructFile(outFile);
 
